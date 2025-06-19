@@ -1,0 +1,83 @@
+name: B2B Docs Issue Notifier
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # every day at 03:00 UTC
+  workflow_dispatch:     # allow manual runs
+
+jobs:
+  notify_b2b_docs_issues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install requests library
+        run: pip install requests
+
+      - name: Fetch and notify open B2B Docs issues
+        env:
+          REPO: 'wso2/product-is'
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+        run: |
+          python <<EOF
+          import os
+          import requests
+
+          repo = os.environ["REPO"]
+          token = os.environ["GITHUB_TOKEN"]
+          webhook_url = os.environ["GOOGLE_CHAT_WEBHOOK_URL"]
+
+          headers = {
+              "Authorization": f"token {token}",
+              "Accept": "application/vnd.github.v3+json"
+          }
+
+          query = f"repo:{repo} is:issue is:open label:'Type/Docs' label:'Team/B2B'"
+          api_url = f"https://api.github.com/search/issues?q={query}"
+
+          response = requests.get(api_url, headers=headers)
+          issues = response.json().get("items", [])
+
+          if not issues:
+              message = "✅ No open B2B Docs issues found."
+          else:
+              message = f"🚨 *{len(issues)} open B2B Docs issues found:*\n"
+              for issue in issues[:10]:  # Limit to 10 for message length
+                  title = issue['title']
+                  url = issue['html_url']
+                  message += f"- [{title}]({url})\n"
+
+          chat_payload = {
+              "cards": [
+                  {
+                      "header": {
+                          "title": "B2B Docs Issue Tracker",
+                          "subtitle": f"{repo}",
+                          "imageUrl": "https://cdn-icons-png.flaticon.com/512/3106/3106770.png"
+                      },
+                      "sections": [
+                          {
+                              "widgets": [
+                                  {
+                                      "textParagraph": {
+                                          "text": message.replace("*", "**")  # bold markdown fix for Chat
+                                      }
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              ]
+          }
+
+          chat_url = webhook_url + "&threadKey=B2BDocsIssues"
+
+          print("Message to be sent to Google Chat:\n")
+          print(message)
+          r = requests.post(chat_url, json=chat_payload)
+          r.raise_for_status()
+          EOF
