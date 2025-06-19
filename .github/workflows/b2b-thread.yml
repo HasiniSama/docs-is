@@ -21,7 +21,7 @@ jobs:
       - name: Fetch and notify open B2B Docs issues
         env:
           REPO: 'wso2/product-is'
-          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.B2B_GOOGLE_CHAT_WEBHOOK_URL }}
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python <<EOF
@@ -82,19 +82,8 @@ jobs:
                       "header": {
                           "title": "B2B Doc Issue Notifier",  # This sets the visible thread name
                           "subtitle": f"{repo}",
-                          "imageUrl": "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"
-                      },
-                      "sections": [
-                          {
-                              "widgets": [
-                                  {
-                                      "textParagraph": {
-                                          "text": message
-                                      }
-                                  }
-                              ]
-                          }
-                      ]
+                          "imageUrl": "https://cdn-icons-png.flaticon.com/512/2626/2626061.png"
+                      }
                   }
               ]
           }
