@@ -463,6 +463,8 @@ nav:
           - Register a machine-to-machine (M2M) app: guides/applications/register-machine-to-machine-app.md
           - Register a FAPI-compliant app: guides/applications/register-a-fapi-compliant-app.md
           - Register an MCP client app: guides/applications/register-mcp-client-app.md
+          - Register a React app: guides/applications/register-react-app.md
+          - Register a Next.js app: guides/applications/register-nextjs-app.md
       - Authentication:
           - Authentication: guides/authentication/index.md
           - Add login to apps:
@@ -583,6 +585,7 @@ nav:
         - Authorization: guides/authorization/index.md
         - API authorization:
           - Role-based access control: guides/authorization/api-authorization/api-authorization.md
+        - MCP server authorization: guides/authorization/mcp-server-authorization.md
         - User impersonation:
           - User impersonation: guides/authorization/user-impersonation/index.md
           - via Console: guides/authorization/user-impersonation/via-console.md
@@ -715,7 +718,9 @@ nav:
             - Branding: guides/branding/index.md
             - Configure UI branding: guides/branding/configure-ui-branding.md
             - Branding AI: guides/branding/branding-ai.md
-            - Customize layouts: guides/branding/add-custom-layouts.md
+            - Customize layouts:
+              - Using the Console: guides/branding/customize-layouts-with-editor.md
+              - By updating server files: guides/branding/add-custom-layouts.md
             - Customize email templates: guides/branding/customize-email-templates.md
             - Customize SMS templates: guides/branding/customize-sms-templates.md
             - Localization support: guides/branding/localization.md
@@ -741,6 +746,13 @@ nav:
         - Multitenancy: guides/multitenancy/index.md
         - Manage Root Organizations (Tenants): guides/multitenancy/manage-tenants.md
         - Tenant loading policy: guides/multitenancy/configure-the-tenant-loading-policy.md
+      - Agentic AI:
+        - Identity for AI Agents:
+          - Identity for AI agents: guides/agentic-ai/ai-agents/index.md
+          - Register and manage agents: guides/agentic-ai/ai-agents/register-and-manage-agents.md
+          - Agent credentials: guides/agentic-ai/ai-agents/agent-credentials.md
+          - Access control for agents: guides/agentic-ai/ai-agents/access-control-for-agents.md
+          - Agent authentication: guides/agentic-ai/ai-agents/agent-authentication.md
       - Your WSO2 Identity Server:
         - Your WSO2 Identity Server: guides/your-is/index.md
         - Manage Console access: guides/your-is/manage-console-access.md

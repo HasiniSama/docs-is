@@ -61,11 +61,11 @@ extra:
           - title: Connect Next.js App
             url: Get started|Connect App|Next.js|Quickstart
           - title: Connect Node.js App
-            url: Get started|Connect App|Node.js Guide
+            url: Get started|Connect App|Node.js|Complete Guide
           - title: Connect .NET App
-            url: Get started|Connect App|.NET Guide 
+            url: Get started|Connect App|.NET|Complete Guide
           - title: Connect Spring Boot App
-            url: Get started|Connect App|Spring Boot Quickstart
+            url: Get started|Connect App|Spring Boot|Quickstart
     - section:
       - title: Guides
         icon: octicons/book-16
@@ -217,11 +217,15 @@ nav:
         - Complete Guide (Redirect): complete-guides/nextjs/introduction.md
         - Complete Guide (App-Native): complete-guides/app-native/introduction.md
         - Complete Guide (B2B): complete-guides/nextjs-b2b/introduction.md
-      - Node.js Guide: complete-guides/nodejs/introduction.md
-      - .NET Guide: complete-guides/dotnet/introduction.md
-      - Spring Boot Quickstart: quick-starts/springboot.md
+      - Node.js:
+        - Complete Guide: complete-guides/nodejs/introduction.md
+      - .NET: 
+        - Complete Guide: complete-guides/dotnet/introduction.md
+      - Spring Boot:
+        - Quickstart: quick-starts/springboot.md
       - MCP Server:
-        - Quickstart: quick-starts/cloudflare-mcp-server.md
+        - Cloudflare Quickstart: quick-starts/cloudflare-mcp-server.md
+        - MCP-Auth Quickstart: quick-starts/mcp-auth-server.md
     - Connect via MCP:
       - MCP Server: quick-starts/mcp-server.md
   # TODO: Enable the following sections after the preoper content is added
@@ -240,6 +244,8 @@ nav:
           - Register a machine-to-machine app: guides/applications/register-machine-to-machine-app.md
           - Register a FAPI-compliant app: guides/applications/register-a-fapi-compliant-app.md
           - Register an MCP client app: guides/applications/register-mcp-client-app.md
+          - Register a React app: guides/applications/register-react-app.md
+          - Register a Next.js app: guides/applications/register-nextjs-app.md
       - Authentication:
           - Authentication: guides/authentication/index.md
           - Add login to apps:
@@ -280,6 +286,8 @@ nav:
             - Add decentralized login:
               - Add decentralized login: guides/authentication/decentralized-login/index.md
               - Sign-in with Ethereum: guides/authentication/decentralized-login/sign-in-with-ethereum.md
+            - Add eid login:
+              - Add Signicat login: guides/authentication/eid-login/add-signicat-login.md
             - Add standard-based login:
               - Add standard-based login: guides/authentication/standard-based-login/index.md
               - Add login with OIDC IdP: guides/authentication/standard-based-login/add-oidc-idp-login.md
@@ -346,6 +354,7 @@ nav:
         - Authorization: guides/authorization/index.md
         - API authorization:
           - Role-based access control: guides/authorization/api-authorization/api-authorization.md
+        - MCP server authorization: guides/authorization/mcp-server-authorization.md
         - User impersonation:
           - User impersonation: guides/authorization/user-impersonation/index.md
           - via Console: guides/authorization/user-impersonation/via-console.md
@@ -444,6 +453,7 @@ nav:
         - Customize branding: 
             - Customize branding: guides/branding/index.md
             - Configure UI branding: guides/branding/configure-ui-branding.md
+            - Customize layouts: guides/branding/customize-layouts-with-editor.md
             - Branding AI: guides/branding/branding-ai.md
             - Configure custom domains: guides/branding/configure-custom-domains.md
             - Customize email templates: guides/branding/customize-email-templates.md
@@ -458,6 +468,10 @@ nav:
               - Pre issue access token action: guides/service-extensions/pre-flow-extensions/pre-issue-access-token-action.md
               - Pre update password action: guides/service-extensions/pre-flow-extensions/pre-update-password-action.md
               - Pre update profile action: guides/service-extensions/pre-flow-extensions/pre-update-profile-action.md
+        - Integrate with webhooks:
+            - Understanding webhooks: guides/webhooks/understanding-webhooks.md
+            - Setup webhooks: guides/webhooks/setup-webhooks.md
+            - Webhook events and payloads: guides/webhooks/webhook-events-and-payloads.md
       - Your Asgardeo:
         - Your Asgardeo: guides/your-asgardeo/index.md
         - Manage root organizations: guides/your-asgardeo/manage-root-organizations.md
@@ -480,7 +494,14 @@ nav:
         - Monitoring: guides/monitoring/index.md
         - PII in Asgardeo logs: guides/monitoring/pii-in-asgardeo-logs.md
         - Asgardeo events: guides/monitoring/asgardeo-events.md
-      - Organization insights: guides/organization-insights.md
+        - Organization insights: guides/organization-insights.md
+      - Agentic AI:
+        - Identity for AI Agents:
+          - Identity for AI agents: guides/agentic-ai/ai-agents/index.md
+          - Register and manage agents: guides/agentic-ai/ai-agents/register-and-manage-agents.md
+          - Agent credentials: guides/agentic-ai/ai-agents/agent-credentials.md
+          - Access control for agents: guides/agentic-ai/ai-agents/access-control-for-agents.md
+          - Agent authentication: guides/agentic-ai/ai-agents/agent-authentication.md
   - Tutorials:
     - Tutorials - Overview: tutorials/index.md
     - Authenticate users into Android applications: tutorials/auth-users-into-android-apps.md
@@ -490,7 +511,71 @@ nav:
     - Secure Spring Boot API with Asgardeo: tutorials/secure-spring-boot-api.md
     - Integrate Asgardeo with Smart on FHIR healthcare apps: tutorials/smart-on-fhir.md
   - SDKs:
-    - Integrate Asgardeo into your application: integrations/index.md
+    - Integrate Asgardeo into your application: sdks/index.md
+  - SDK Documentation:
+    - React SDK:
+      - Overview: sdks/react/overview.md
+      - APIs:
+        - Contexts:
+          - "&lt;AsgardeoProvider /&gt;": sdks/react/contexts/asgardeo-provider.md
+        - Components:
+          - Action Components:
+            - "&lt;SignInButton /&gt;": sdks/react/components/action-components/sign-in-button.md
+            - "&lt;SignOutButton /&gt;": sdks/react/components/action-components/sign-out-button.md
+            - "&lt;SignUpButton /&gt;": sdks/react/components/action-components/sign-up-button.md
+          - Control Components:
+            - "&lt;SignedIn /&gt;": sdks/react/components/control-components/signed-in.md
+            - "&lt;SignedOut /&gt;": sdks/react/components/control-components/signed-out.md
+            - "&lt;Loading /&gt;": sdks/react/components/control-components/loading.md
+          - User Self-care Components:
+            - "&lt;UserDropdown /&gt;": sdks/react/components/user-selfcare-components/user-dropdown.md
+            - "&lt;UserProfile /&gt;": sdks/react/components/user-selfcare-components/user-profile.md
+            - "&lt;User /&gt;": sdks/react/components/user-selfcare-components/user.md
+          - Organization Components (B2B):
+            - "&lt;CreateOrganization /&gt;": sdks/react/components/organization-components/create-organization.md
+            - "&lt;OrganizationProfile /&gt;": sdks/react/components/organization-components/organization-profile.md
+            - "&lt;OrganizationSwitcher /&gt;": sdks/react/components/organization-components/organization-switcher.md
+            - "&lt;OrganizationList /&gt;": sdks/react/components/organization-components/organization-list.md
+            - "&lt;Organization /&gt;": sdks/react/components/organization-components/organization.md
+        - hooks:
+          - useAsgardeo(): sdks/react/hooks/use-asgardeo.md
+      - Guides:
+        - Accessing Protected APIs: sdks/react/guides/accessing-protected-apis.md
+        - Protecting Routes: sdks/react/guides/protecting-routes.md
+    - Next.js SDK:
+      - Overview: sdks/nextjs/overview.md
+      - APIs:
+        - Contexts:
+          - "&lt;AsgardeoProvider /&gt;": sdks/nextjs/contexts/asgardeo-provider.md
+        - Middleware:
+          - asgardeoMiddleware(): sdks/nextjs/middleware/asgardeo-middleware.md
+        - Components:
+          - Action Components:
+            - "&lt;SignInButton /&gt;": sdks/nextjs/components/action-components/sign-in-button.md
+            - "&lt;SignOutButton /&gt;": sdks/nextjs/components/action-components/sign-out-button.md
+            - "&lt;SignUpButton /&gt;": sdks/nextjs/components/action-components/sign-up-button.md
+          - Control Components:
+            - "&lt;SignedIn /&gt;": sdks/nextjs/components/control-components/signed-in.md
+            - "&lt;SignedOut /&gt;": sdks/nextjs/components/control-components/signed-out.md
+            - "&lt;Loading /&gt;": sdks/nextjs/components/control-components/loading.md
+          - Authentication Components:
+            - "&lt;SignIn /&gt;": sdks/nextjs/components/authentication/sign-in.md
+            - "&lt;SignUp /&gt;": sdks/nextjs/components/authentication/sign-up.md
+          - User Self-care Components:
+            - "&lt;UserDropdown /&gt;": sdks/nextjs/components/user-selfcare-components/user-dropdown.md
+            - "&lt;UserProfile /&gt;": sdks/nextjs/components/user-selfcare-components/user-profile.md
+            - "&lt;User /&gt;": sdks/nextjs/components/user-selfcare-components/user.md
+          - Organization Components (B2B):
+            - "&lt;CreateOrganization /&gt;": sdks/nextjs/components/organization-components/create-organization.md
+            - "&lt;OrganizationProfile /&gt;": sdks/nextjs/components/organization-components/organization-profile.md
+            - "&lt;OrganizationSwitcher /&gt;": sdks/nextjs/components/organization-components/organization-switcher.md
+            - "&lt;OrganizationList /&gt;": sdks/nextjs/components/organization-components/organization-list.md
+            - "&lt;Organization /&gt;": sdks/nextjs/components/organization-components/organization.md
+        - hooks:
+          - useAsgardeo(): sdks/nextjs/hooks/use-asgardeo.md
+      - Guides:
+        - Accessing Protected APIs: sdks/nextjs/guides/accessing-protected-apis.md
+        - Protecting Routes: sdks/nextjs/guides/protecting-routes.md
   - APIs:
     - APIs - Overview: apis/index.md
     - Management APIs:
@@ -671,7 +756,7 @@ nav:
         - Prerequisite: complete-guides/nextjs/prerequisite.md
         - Register an application: complete-guides/nextjs/register-an-application.md
         - Create a Next.js app: complete-guides/nextjs/create-app.md
-        - Configure Asgardeo provider: complete-guides/nextjs/install-asgardeo-sdk.md
+        - Configure Asgardeo SDK: complete-guides/nextjs/install-asgardeo-sdk.md
         - Add login and logout: complete-guides/nextjs/add-login-and-logout.md
         - Display user details: complete-guides/nextjs/display-logged-in-user-details.md
         - Securing Routes: complete-guides/nextjs/securing-routes-within-the-app.md
@@ -683,8 +768,7 @@ nav:
         - Prerequisites: complete-guides/app-native/prerequisites.md
         - Register an application: complete-guides/app-native/register-an-application.md
         - Create an app for app-native authentication: complete-guides/app-native/create-app.md
-        - Configure Provider: complete-guides/app-native/configure-provider.md
-        - Configure utility functions for app-native authentication: complete-guides/app-native/configure-utility-functions.md
+        - Configure Asgardeo SDK: complete-guides/app-native/configure-provider.md
         - Add login and logout: complete-guides/app-native/add-login-and-logout.md
         - Add MFA using app-native APIs: complete-guides/app-native/add-mfa.md
         - Add Social Login using app-native APIs: complete-guides/app-native/add-social-login.md

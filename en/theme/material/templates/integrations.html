@@ -37,8 +37,8 @@
         We’re actively working on expanding official SDK support for more languages and frameworks.</p>
 
       {% for section in config.extra.integrations %}
-      {% if 'in_house' in section %}
-      {% for block in section.in_house %}
+      {% if 'official' in section %}
+      {% for block in section.official %}
 
       {% if block.heading is defined %}
       {% set heading = block.heading.replace('{{ product_name }}', config.extra.product_name) %}

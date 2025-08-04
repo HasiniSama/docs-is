@@ -1,11 +1,18 @@
-# Configure post-quantum TLS for inbound connections
-
 By following this guide, you will enable **post-quantum TLS** in {{ product_name }} for inbound connections. An inbound connection refers to communication initiated by clients, such as browsers, applications, or APIs, connecting securely to {{ product_name }} using TLS.
 
 !!! note "Post-quantum TLS requirements"
 
     - Post-quantum TLS is only supported over TLS 1.3.
     - {{product_name}} currently supports post-quantum security only on Linux and MacOS operating systems.
+
+{% if is_version == "7.0.0" %}
+!!! note "important"
+    Post-quantum TLS artifacts don't ship with {{product_name}} 7.0.0. To enable post-quantum TLS, manually apply the following artifacts by using the steps below.
+
+    - Download [openssl-tls.sh](https://gist.github.com/maheshika/abc3052967c3a363ebfddce7258f6faf/raw/f701542b48e9a78135946ab4c3b348283d2637c0/openssl-tls.sh){:target="_blank"} and copy the file to `<IS_HOME>/bin/`.
+    - Download [wso2server.sh](https://gist.github.com/maheshika/abc3052967c3a363ebfddce7258f6faf/raw/f701542b48e9a78135946ab4c3b348283d2637c0/wso2server.sh){:target="_blank"} and replace the file in `<IS_HOME>/bin/`.
+    - Download [catalina-server.xml.j2](https://gist.github.com/maheshika/abc3052967c3a363ebfddce7258f6faf/raw/f701542b48e9a78135946ab4c3b348283d2637c0/catalina-server.xml.j2){:target="_blank"} and replace the file in `<IS_HOME>/repository/resources/conf/templates/repository/conf/tomcat`.
+{% endif %}
 
 ## Step 1: Build native libraries
 
@@ -21,7 +28,7 @@ This method relies on your operating system’s existing libraries during both t
 
 {{product_name}} requires the following during the build process.
 
-- Build tools (`make`, `cmake`, `wget`, `tar`)
+- Build tools (`make`, `cmake`, `wget`, `tar`, `autoconf`)
 - GNU compiler (`gcc`)
 - Apache Portable Runtime (APR) library
 - OpenSSL 3.0 or higher.
@@ -37,13 +44,13 @@ To install these dependencies, follow the instructions below based on the operat
         In Debian-based Linux:
 
         ```bash
-        apt-get install make cmake wget tar gcc libapr1-dev libssl-dev
+        apt-get install make cmake autoconf wget tar gcc libapr1-dev libssl-dev
         ```
 
         In Red Hat Linux distributions:
 
         ```bash
-        yum install make cmake wget tar gcc apr-devel openssl-devel perl
+        yum install make cmake autoconf wget tar gcc apr-devel openssl-devel perl
         ```
 
 === "MacOS"
@@ -51,7 +58,7 @@ To install these dependencies, follow the instructions below based on the operat
     1. Use Homebrew to install all the required build dependencies.
 
         ```bash
-        brew install wget cmake openssl@3 apr
+        brew install wget cmake autoconf openssl@3 apr
         ```
 
     2. Add the following line to your shell configuration file (e.g., `~/.bash_profile`, `~/.zshrc`, or `~/.bashrc`):
@@ -95,7 +102,7 @@ This method installs all dependencies into the {{product_name}} directory, ensur
 
 {{product_name}} requires the following during the build process.
 
-- Build tools (`make`, `cmake`, `wget`, `tar`)
+- Build tools (`make`, `cmake`, `wget`, `tar`, `autoconf`)
 - GNU compiler (`gcc`/`clang`)
 
 To install these dependencies, follow the instructions below based on the operating system.
@@ -107,13 +114,13 @@ To install these dependencies, follow the instructions below based on the operat
     In Debian-based Linux:
 
     ```bash
-    apt-get install make cmake wget tar gcc git python3 autoconf libtool-bin
+    apt-get install make cmake autoconf wget tar gcc git python3 autoconf libtool-bin
     ```
 
     In Red Hat Linux distributions:
 
     ```bash
-    yum install make cmake wget tar gcc perl git python3 autoconf libtool
+    yum install make cmake autoconf wget tar gcc perl git python3 autoconf libtool
     ```
 
 === "MacOS"
@@ -121,7 +128,7 @@ To install these dependencies, follow the instructions below based on the operat
     Use Homebrew to install dependencies.
 
     ```bash
-    brew install wget cmake git python3 autoconf libtool
+    brew install wget autoconf cmake git python3 autoconf libtool
     ```
 
 #### Runtime dependencies
